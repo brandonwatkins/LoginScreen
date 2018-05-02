@@ -1,5 +1,6 @@
 package loginscreen.solution.example.com.loginscreen;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,11 @@ import android.widget.ViewFlipper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static loginscreen.solution.example.com.loginscreen.DetailsDb.EMAIL;
+import static loginscreen.solution.example.com.loginscreen.DetailsDb.PASSWORD;
+import static loginscreen.solution.example.com.loginscreen.DetailsDb.PHONE;
+import static loginscreen.solution.example.com.loginscreen.DetailsDb.USERNAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -153,7 +159,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     if (validInfo == true) {
+      DetailsDb db = new DetailsDb(this);
 
+      ContentValues cv = new ContentValues();
+
+      cv.put(USERNAME, name);
+      cv.put(EMAIL, email);
+      cv.put(PASSWORD, pass);
+      cv.put(PHONE, phone);
+
+      db.insert(cv);
       startActivity(i);
     }
 
