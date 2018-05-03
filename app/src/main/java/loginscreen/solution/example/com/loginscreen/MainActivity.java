@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
       validInfo = false;
     }
 
-    if ((pass.length() < 6 && !isPasswordValid(pass)) || isEmpty(pass)) {
+    if (!isPasswordValid(pass) || isEmpty(pass)) {
       mPasswordEt.setError(getResources().getString(R.string.passwordError));
       validInfo = false;
     }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     Pattern pattern;
     Matcher matcher;
-    String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!*])";
+    String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!*])(?=.{6,})";
     pattern = Pattern.compile(PASSWORD_PATTERN);
     matcher = pattern.matcher(password);
 
