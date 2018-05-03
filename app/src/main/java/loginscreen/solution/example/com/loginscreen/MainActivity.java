@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     Pattern pattern;
     Matcher matcher;
-    String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+    String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!*])";
     pattern = Pattern.compile(PASSWORD_PATTERN);
     matcher = pattern.matcher(password);
 
