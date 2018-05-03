@@ -76,9 +76,6 @@ public class DetailsDb {
         public void onCreate(SQLiteDatabase db) {
             String sql=String.format("create table %s(%s text ,%s text primary key,%s text,%s int)",TABLE_NAME,USERNAME,EMAIL,PASSWORD,PHONE);
             db.execSQL(sql);
-
-
-
         }
 
         @Override

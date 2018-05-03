@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-
   /**
    * Button that takes the information out of the EdiText fields. Checks if the information is valid,
    * and then creates a new account.
@@ -208,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
     matcher = pattern.matcher(password);
 
     return matcher.matches();
-
   }
 
     /**
