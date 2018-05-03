@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
   }
 
+  // TODO Fix
   public boolean isPasswordValid(String password) {
 
     Pattern pattern;
