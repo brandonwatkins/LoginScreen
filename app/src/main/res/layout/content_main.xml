@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:allowUndo="false"
             android:autoText="false"
-            android:background="@color/white"
+            android:background="@color/buttoncolor"
             android:text="Log In" />
 
         <Button
@@ -124,7 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:background="#CC5ec639"
-                android:text="Create Account" />
+                android:text="Create Account"
+                android:onClick="CreateAccountBtn"/>
         </LinearLayout>
 
     </ViewFlipper>

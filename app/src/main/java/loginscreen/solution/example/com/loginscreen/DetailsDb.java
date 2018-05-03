@@ -46,8 +46,8 @@ public class DetailsDb {
         Cursor cur=database.query(DbHelper.TABLE_NAME, null, null, null, null, null, null);
 
         return cur;
-
     }
+
     public Cursor validate(String email,String password)
     {
 

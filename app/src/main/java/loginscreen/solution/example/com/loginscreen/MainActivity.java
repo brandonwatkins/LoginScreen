@@ -22,7 +22,6 @@ import static loginscreen.solution.example.com.loginscreen.DetailsDb.USERNAME;
 
 public class MainActivity extends AppCompatActivity {
 
-
   private Button mLoginBtn;
   private Button mSignUpBtn;
   private Button mSignInBtn;
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     mPasswordEt = (EditText) findViewById(R.id.et_password);
     mSignInBtn = (Button) findViewById(R.id.bt_sign_in);
     mCreateAccountBtn = (Button) findViewById(R.id.bt_create);
+    mPhoneEt = (EditText) findViewById(R.id.et_phone);
 
     mViewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
     mLoginBtn = (Button) findViewById(R.id.bt_login);
@@ -69,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Checks to see what page is currently showing. If login page is already showing
         // it does not showNext();
-        if (onLoginPage == false) {
-          mViewFlipper.showNext();
-          mNameLl.setVisibility(View.INVISIBLE);
-          onLoginPage = true;
+        if (!onLoginPage) {
+            mSignUpBtn.setBackgroundColor(getResources().getColor(R.color.white));
+            mLoginBtn.setBackgroundColor(getResources().getColor(R.color.buttoncolor));
+            mViewFlipper.showNext();
+            mNameLl.setVisibility(View.INVISIBLE);
+            onLoginPage = true;
         }
       }
     });
@@ -85,10 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Checks to see what page is currently showing. If sign up is already showing
         // it does not showPrevious();
-        if (onLoginPage == true) {
-          mViewFlipper.showPrevious();
-          mNameLl.setVisibility(View.VISIBLE);
-          onLoginPage = false;
+        if (onLoginPage) {
+            mLoginBtn.setBackgroundColor(getResources().getColor(R.color.white));
+            mSignUpBtn.setBackgroundColor(getResources().getColor(R.color.buttoncolor));
+            mViewFlipper.showPrevious();
+            mNameLl.setVisibility(View.VISIBLE);
+            onLoginPage = false;
         }
       }
     });
@@ -138,29 +142,28 @@ public class MainActivity extends AppCompatActivity {
     Boolean validInfo = true;
 
 
-    if (!name.matches("[A-Za-z0-9]+")) {
-      mNameEt.setError(R.string.nameError + "");
+    if (!name.matches("[A-Za-z0-9]+") || isEmpty(name)) {
+      mNameEt.setError(getResources().getString(R.string.nameError));
       validInfo = false;
     }
 
-    if (!isEmailValid(email)) {
-      mEmailEt.setError(R.string.emailError + "");
+    if (!isEmailValid(email) || isEmpty(email)) {
+      mEmailEt.setError(getResources().getString(R.string.emailError));
       validInfo = false;
     }
 
-    if (!isPasswordValid(pass)) {
-      mPasswordEt.setError(R.string.passwordError + "");
+    if (!isPasswordValid(pass) || isEmpty(pass)) {
+      mPasswordEt.setError(getResources().getString(R.string.passwordError));
       validInfo = false;
     }
 
-    if (!isPhoneNumberValid(phone)) {
-      mPhoneEt.setError(R.string.phoneNumError + "");
+    if (!isPhoneNumberValid(phone) || isEmpty(phone)) {
+      mPhoneEt.setError(getResources().getString(R.string.phoneNumError));
       validInfo = false;
     }
 
     if (validInfo == true) {
       DetailsDb db = new DetailsDb(this);
-
       ContentValues cv = new ContentValues();
 
       cv.put(USERNAME, name);
@@ -169,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
       cv.put(PHONE, phone);
 
       db.insert(cv);
+
+      i.putExtra("USEREMAIL", email);
       startActivity(i);
     }
 
@@ -205,6 +210,15 @@ public class MainActivity extends AppCompatActivity {
       return false;
     }
 
+  }
+
+  public boolean isEmpty(String info) {
+
+      if (TextUtils.isEmpty(info)) {
+          return true;
+      } else {
+          return false;
+      }
   }
 
 
