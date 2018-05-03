@@ -1,5 +1,7 @@
 package loginscreen.solution.example.com.loginscreen;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -15,17 +17,34 @@ public class WelcomeActivity extends AppCompatActivity {
     super.onCreate(instanceState);
     setContentView(R.layout.content_welcome);
 
+    Intent intent = getIntent();
+    Bundle bundle = intent.getExtras();
+
     mNameTv = (TextView) findViewById(R.id.tv_name);
     mEmailTv = (TextView) findViewById(R.id.tv_email);
-    mPhoneTv = (TextView) findViewById(R.id.et_phone);
+    mPhoneTv = (TextView) findViewById(R.id.tv_phone);
 
     String name = "";
     String email = "";
     String phone = "";
 
-    DetailsDb db = new DetailsDb(this);
+    if (bundle != null) {
+        email = (String) bundle.get("USEREMAIL");
+    }
 
-    db.query();
+    DetailsDb db = new DetailsDb(this);
+    Cursor cursor = db.query(email);
+
+    if (cursor != null) {
+        try {
+            if (cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndex("username"));
+                phone = cursor.getString(cursor.getColumnIndex("phone"));
+            }
+        } finally {
+            cursor.close();
+        }
+    }
 
     mNameTv.setText(name);
     mEmailTv.setText(email);
@@ -33,5 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
   }
+
+
 
 }

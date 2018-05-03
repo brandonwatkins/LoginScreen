@@ -41,9 +41,13 @@ public class DetailsDb {
             dbhelper.close();
         }
     }
-    public Cursor query(){
+    public Cursor query(String userEmail){
         database=dbhelper.getReadableDatabase();
-        Cursor cur=database.query(DbHelper.TABLE_NAME, null, null, null, null, null, null);
+
+        String where = "email= ?";
+        String[] whereArgs = {userEmail};
+
+        Cursor cur=database.query(DbHelper.TABLE_NAME, null, where, whereArgs, null, null, null);
 
         return cur;
     }

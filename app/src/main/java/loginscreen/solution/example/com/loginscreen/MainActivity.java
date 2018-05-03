@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
     String email = mEmailEt.getText().toString();
     String pass = mPasswordEt.getText().toString();
 
+    i.putExtra("USEREMAIL", email);
+
     CheckCredentials credentials = new CheckCredentials(this);
 
     // Check if credentials match a db entry.
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
    */
   public void CreateAccountBtn(View view) {
 
-    Intent i = new Intent(this, WelcomeActivity.class);
+    Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
 
     String name = mNameEt.getText().toString();
     String email = mEmailEt.getText().toString();
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
       validInfo = false;
     }
 
-    if (!isPasswordValid(pass) || isEmpty(pass)) {
+    if ((pass.length() < 6 && !isPasswordValid(pass)) || isEmpty(pass)) {
       mPasswordEt.setError(getResources().getString(R.string.passwordError));
       validInfo = false;
     }
@@ -187,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
     Pattern pattern;
     Matcher matcher;
-    final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+    String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
     pattern = Pattern.compile(PASSWORD_PATTERN);
     matcher = pattern.matcher(password);
 
