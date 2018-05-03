@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
       validInfo = false;
     }
 
-    if ((pass.length() < 6 && !isPasswordValid(pass)) || isEmpty(pass)) {
+    if (!isPasswordValid(pass) || isEmpty(pass)) {
       mPasswordEt.setError(getResources().getString(R.string.passwordError));
       validInfo = false;
     }
@@ -185,11 +185,12 @@ public class MainActivity extends AppCompatActivity {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
   }
 
+  // TODO Fix
   public boolean isPasswordValid(String password) {
 
     Pattern pattern;
     Matcher matcher;
-    String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+    String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!*])(?=.{6,})";
     pattern = Pattern.compile(PASSWORD_PATTERN);
     matcher = pattern.matcher(password);
 

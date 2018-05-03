@@ -50,9 +50,6 @@ public class WelcomeActivity extends AppCompatActivity {
     mEmailTv.setText(email);
     mPhoneTv.setText(phone);
 
-
   }
-
-
 
 }
