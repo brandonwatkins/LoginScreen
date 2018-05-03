@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean validInfo = true;
 
 
-    if (!name.matches("[A-Za-z0-9]+") || isEmpty(name)) {
+    if (!name.matches("[a-zA-Z0-9 ]+") || isEmpty(name)) {
       mNameEt.setError(getResources().getString(R.string.nameError));
       validInfo = false;
     }
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
     Pattern pattern;
     Matcher matcher;
-    String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!*])(?=.{6,})";
+    String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#%&=:;,_<>/\\.\\[\\]\\{\\}\\(\\)\\*\\+\\-\\?\\^\\$\\|]).{6,}";
     pattern = Pattern.compile(PASSWORD_PATTERN);
     matcher = pattern.matcher(password);
 
