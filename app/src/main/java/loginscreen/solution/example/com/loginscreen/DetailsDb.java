@@ -41,6 +41,8 @@ public class DetailsDb {
             dbhelper.close();
         }
     }
+
+    // Query method that returns the users info from the database
     public Cursor query(String userEmail){
         database=dbhelper.getReadableDatabase();
 

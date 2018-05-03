@@ -17,6 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
     super.onCreate(instanceState);
     setContentView(R.layout.content_welcome);
 
+    // Retrieve users email that was bundled into the intent passed in
     Intent intent = getIntent();
     Bundle bundle = intent.getExtras();
 
@@ -33,8 +34,11 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     DetailsDb db = new DetailsDb(this);
+
+    // Fill cursor with users information
     Cursor cursor = db.query(email);
 
+    // Search cursor for information needed to fill TextVIews
     if (cursor != null) {
         try {
             if (cursor.moveToFirst()) {

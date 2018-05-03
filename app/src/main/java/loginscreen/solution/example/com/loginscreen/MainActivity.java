@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
   private Button mLoginBtn;
   private Button mSignUpBtn;
-  private Button mSignInBtn;
-  private Button mCreateAccountBtn;
   private EditText mNameEt;
   private EditText mPhoneEt;
   private EditText mEmailEt;
@@ -45,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     mPasswordEt = (EditText) findViewById(R.id.et_phone);
     mEmailEt = (EditText) findViewById(R.id.et_email);
     mPasswordEt = (EditText) findViewById(R.id.et_password);
-    mSignInBtn = (Button) findViewById(R.id.bt_sign_in);
-    mCreateAccountBtn = (Button) findViewById(R.id.bt_create);
     mPhoneEt = (EditText) findViewById(R.id.et_phone);
 
     mViewFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
@@ -106,11 +102,12 @@ public class MainActivity extends AppCompatActivity {
    */
   public void SignInBtn(View view) {
 
-    Intent i = new Intent(this, WelcomeActivity.class);
+    Intent i = new Intent(MainActivity.this, WelcomeActivity.class);
 
     String email = mEmailEt.getText().toString();
     String pass = mPasswordEt.getText().toString();
 
+    // Bundle the users email entered into intent. This is used to find the users other info
     i.putExtra("USEREMAIL", email);
 
     CheckCredentials credentials = new CheckCredentials(this);
@@ -141,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
     String pass = mPasswordEt.getText().toString();
     String phone = mPhoneEt.getText().toString();
 
+    // Flag to keep track of valid info
     Boolean validInfo = true;
 
 
@@ -181,11 +179,26 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+    /**
+     * Email validation method
+     * @param email
+     * @return
+     */
   public boolean isEmailValid(CharSequence email) {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
   }
 
-  // TODO Fix
+    /**
+     * Password validation method. I created a regex expression to validate the password.
+     * Returns true if "password" contains the following:
+     * - At least 6 characters long
+     * - One or more uppercase character
+     * - One or more lowercase character
+     * - One or more digits
+     * - One or more special characters
+     * @param password
+     * @return
+     */
   public boolean isPasswordValid(String password) {
 
     Pattern pattern;
@@ -198,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+    /**
+     * Phone number validation method. Method checks if the string consits only of digits and if
+     * it contains 10 digits
+     * @param phoneNumber
+     * @return
+     */
   public boolean isPhoneNumberValid(String phoneNumber) {
 
     boolean isNum = TextUtils.isDigitsOnly(phoneNumber);
@@ -215,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+    /**
+     * Checks if user has not entered text into the EditText fields. Returns false if "info" is
+     * empty
+     * @param info
+     * @return
+     */
   public boolean isEmpty(String info) {
 
       if (TextUtils.isEmpty(info)) {
